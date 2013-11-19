@@ -1,0 +1,3 @@
+depend:simple_gui quicky_exception
+CFLAGS:-g -Wall -ansi -pedantic
+LDFLAGS:
