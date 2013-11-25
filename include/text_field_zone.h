@@ -31,6 +31,7 @@ namespace synoptic
   {
   public:
     inline text_field_zone(zone_owner_if &,
+			   const std::string & p_name,
                            const uint32_t &);
     inline void set_text(const std::string & p_text);
     inline void set_text(const uint64_t & p_nb);
@@ -46,8 +47,9 @@ namespace synoptic
   };
   //----------------------------------------------------------------------------
   text_field_zone::text_field_zone(zone_owner_if & p_owner,
+				   const std::string & p_name,
                                    const uint32_t & p_nb_char):
-    zone(p_owner,8 * p_nb_char,8),
+    zone(p_owner,p_name,8 * p_nb_char,8),
     m_nb_char(p_nb_char),
     m_text(p_nb_char,' ')
       {

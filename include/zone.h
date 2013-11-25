@@ -21,6 +21,7 @@
 
 #include "zone_owner_if.h"
 #include <inttypes.h>
+#include <string>
 
 namespace synoptic
 {
@@ -28,8 +29,10 @@ namespace synoptic
   {
   public:
     inline zone(zone_owner_if &,
+		const std::string & p_name,
                 const uint32_t & p_width,
                 const uint32_t & p_height);
+    inline const std::string & get_name(void)const;
     inline const uint32_t & get_width(void)const;
     inline const uint32_t & get_height(void)const;
     inline bool contains(const uint32_t & p_x,
@@ -44,6 +47,7 @@ namespace synoptic
   private:
     virtual void internal_paint(void)=0;
     zone_owner_if & m_owner;
+    const std::string m_name;
     const uint32_t m_width;
     const uint32_t m_height;
   };
@@ -55,13 +59,21 @@ namespace synoptic
   }
   //----------------------------------------------------------------------------
   zone::zone(zone_owner_if & p_owner,
+	     const std::string & p_name,
              const uint32_t & p_width,
              const uint32_t & p_height):
     m_owner(p_owner),
+    m_name(p_name),
     m_width(p_width),
     m_height(p_height)
       {
       }
+  //----------------------------------------------------------------------------
+    const std::string & zone::get_name(void)const
+      {
+	return m_name;
+      }
+
     //----------------------------------------------------------------------------
     const zone_owner_if & zone::get_owner(void)const
       {

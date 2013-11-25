@@ -71,7 +71,8 @@ namespace synoptic
 	  l_iter != m_zones.end();
 	  ++l_iter)
 	{
-	  if(l_iter->first->contains(p_x - l_iter->second.get_x(),p_y - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Top left corner inside an existing zone",__LINE__,__FILE__);
+	  std::string l_zone_name = l_iter->first->get_name();
+	  if(l_iter->first->contains(p_x - l_iter->second.get_x(),p_y - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Top left corner of zone \""+p_zone.get_name()+" inside an existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
 	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Top right corner inside an existing zone",__LINE__,__FILE__);
 	  if(l_iter->first->contains(p_x - l_iter->second.get_x() , p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Bottom left corner inside an existing zone",__LINE__,__FILE__);
 	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Bottom right corner inside an existing zone",__LINE__,__FILE__);
