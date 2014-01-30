@@ -42,9 +42,9 @@ namespace synoptic
                           const uint32_t & p_y,
                           const uint32_t & p_color);
     // Methods from zone_owner_if
-    uint32_t get_color_code(const uint8_t & r,
-                            const uint8_t & g,
-                            const uint8_t & b);
+    inline uint32_t get_color_code(const uint8_t & r,
+				   const uint8_t & g,
+				   const uint8_t & b);
     inline void refresh(void);
     inline void to_refresh(const zone & p_zone);
   private:
