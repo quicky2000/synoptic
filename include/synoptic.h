@@ -80,6 +80,10 @@ namespace synoptic
 	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() - p_y) ) throw quicky_exception::quicky_runtime_exception("Zone contains Top Right corner of existing zone",__LINE__,__FILE__);
 	  if(p_zone.contains(l_iter->second.get_x() - p_x,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y) ) throw quicky_exception::quicky_runtime_exception("Zone contains Bottom left corner of existing zone",__LINE__,__FILE__);
 	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y)) throw quicky_exception::quicky_runtime_exception("Zone contains Bottom right corner of existing zone",__LINE__,__FILE__);
+          if(p_x > l_iter->second.get_x() && p_x + p_zone.get_width() < l_iter->second.get_x() + l_iter->first->get_width() && 
+             p_y < l_iter->second.get_y() && p_y + p_zone.get_height() > l_iter->second.get_y() + l_iter->first->get_height()) throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
+          if(l_iter->second.get_x() > p_x && l_iter->second.get_x() + l_iter->first->get_width() < p_x + p_zone.get_width() && 
+             p_y > l_iter->second.get_y() && p_y + p_zone.get_height() < l_iter->second.get_y() + l_iter->first->get_height()) throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
 	}
       m_zones.insert(std::map<const zone * const,zone_information>::value_type(&p_zone,zone_information(p_x,p_y)));
       m_zones_to_refresh.insert(&p_zone);
