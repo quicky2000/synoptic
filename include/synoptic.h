@@ -72,18 +72,28 @@ namespace synoptic
 	  ++l_iter)
 	{
 	  std::string l_zone_name = l_iter->first->get_name();
-	  if(l_iter->first->contains(p_x - l_iter->second.get_x(),p_y - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Top left corner of zone \""+p_zone.get_name()+" inside an existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
-	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Top right corner inside an existing zone",__LINE__,__FILE__);
-	  if(l_iter->first->contains(p_x - l_iter->second.get_x() , p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Bottom left corner inside an existing zone",__LINE__,__FILE__);
-	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) ) throw quicky_exception::quicky_runtime_exception("Bottom right corner inside an existing zone",__LINE__,__FILE__);
-	  if(p_zone.contains(l_iter->second.get_x() - p_x,l_iter->second.get_y() - p_y) ) throw quicky_exception::quicky_runtime_exception("Zone contains Top left corner of existing zone",__LINE__,__FILE__);
-	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() - p_y) ) throw quicky_exception::quicky_runtime_exception("Zone contains Top Right corner of existing zone",__LINE__,__FILE__);
-	  if(p_zone.contains(l_iter->second.get_x() - p_x,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y) ) throw quicky_exception::quicky_runtime_exception("Zone contains Bottom left corner of existing zone",__LINE__,__FILE__);
-	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y)) throw quicky_exception::quicky_runtime_exception("Zone contains Bottom right corner of existing zone",__LINE__,__FILE__);
+	  if(l_iter->first->contains(p_x - l_iter->second.get_x(),p_y - l_iter->second.get_y()) ) 
+	    throw quicky_exception::quicky_runtime_exception("Top left corner of zone \""+p_zone.get_name()+" inside existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y - l_iter->second.get_y()) )
+	    throw quicky_exception::quicky_runtime_exception("Top right corner of zone \""+p_zone.get_name()+"\" is inside existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(l_iter->first->contains(p_x - l_iter->second.get_x() , p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) )
+	    throw quicky_exception::quicky_runtime_exception("Bottom left corner of zone \""+p_zone.get_name()+" inside an existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(l_iter->first->contains(p_x - l_iter->second.get_x() + p_zone.get_width() - 1 ,p_y + p_zone.get_height() - 1 - l_iter->second.get_y()) )
+	    throw quicky_exception::quicky_runtime_exception("Bottom right corner of zone \""+p_zone.get_name()+" inside an existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(p_zone.contains(l_iter->second.get_x() - p_x,l_iter->second.get_y() - p_y) )
+	    throw quicky_exception::quicky_runtime_exception("Zone \""+p_zone.get_name()+"\" contains Top left corner of existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() - p_y) )
+	    throw quicky_exception::quicky_runtime_exception("Zone \""+p_zone.get_name()+"\" contains Top Right corner of existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(p_zone.contains(l_iter->second.get_x() - p_x,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y) )
+	    throw quicky_exception::quicky_runtime_exception("Zone \""+p_zone.get_name()+"\" contains Bottom left corner of existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
+	  if(p_zone.contains(l_iter->second.get_x() - p_x + l_iter->first->get_width() - 1,l_iter->second.get_y() + l_iter->first->get_height() - 1 - p_y))
+	    throw quicky_exception::quicky_runtime_exception("Zone \""+p_zone.get_name()+"\" contains Bottom right corner of existing zone \""+l_zone_name+"\"",__LINE__,__FILE__);
           if(p_x > l_iter->second.get_x() && p_x + p_zone.get_width() < l_iter->second.get_x() + l_iter->first->get_width() && 
-             p_y < l_iter->second.get_y() && p_y + p_zone.get_height() > l_iter->second.get_y() + l_iter->first->get_height()) throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
+             p_y < l_iter->second.get_y() && p_y + p_zone.get_height() > l_iter->second.get_y() + l_iter->first->get_height())
+	    throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
           if(l_iter->second.get_x() > p_x && l_iter->second.get_x() + l_iter->first->get_width() < p_x + p_zone.get_width() && 
-             p_y > l_iter->second.get_y() && p_y + p_zone.get_height() < l_iter->second.get_y() + l_iter->first->get_height()) throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
+             p_y > l_iter->second.get_y() && p_y + p_zone.get_height() < l_iter->second.get_y() + l_iter->first->get_height())
+	    throw quicky_exception::quicky_runtime_exception("Internal overload between "+p_zone.get_name()+" and "+ l_zone_name,__LINE__,__FILE__);
 	}
       m_zones.insert(std::map<const zone * const,zone_information>::value_type(&p_zone,zone_information(p_x,p_y)));
       m_zones_to_refresh.insert(&p_zone);
