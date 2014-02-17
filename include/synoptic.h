@@ -22,7 +22,7 @@
 #include "simple_gui.h"
 #include "zone_owner_if.h"
 #include "zone_container.h"
-#Include "zone_information.h"
+#include "zone_information.h"
 #include "quicky_exception.h"
 #include <iostream>
 #include <map>
