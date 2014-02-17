@@ -19,17 +19,22 @@
 #ifndef ZONE_H
 #define ZONE_H
 
-#include "zone_owner_if.h"
+#include "zone_information.h"
 #include <inttypes.h>
 #include <string>
+#include <map>
 
 namespace synoptic
 {
+
+
+  /**
+     Define a rectangular geometric zone
+  **/
   class zone
   {
   public:
-    inline zone(zone_owner_if &,
-		const std::string & p_name,
+    inline zone(const std::string & p_name,
                 const uint32_t & p_width,
                 const uint32_t & p_height);
     inline const std::string & get_name(void)const;
@@ -37,53 +42,29 @@ namespace synoptic
     inline const uint32_t & get_height(void)const;
     inline bool contains(const uint32_t & p_x,
 			 const uint32_t & p_y)const;
-    inline void paint(void);
-  protected:
-    inline const zone_owner_if & get_owner(void)const;
-    inline zone_owner_if & get_owner(void);
-    inline void set_pixel(const uint32_t & p_x,
-                          const uint32_t & p_y,
-                          const uint32_t & p_color);
+    virtual void collect_display_zones(std::map<const zone * const,zone_information> & p_zones)const=0;
+    virtual void paint(void)=0;
   private:
-    virtual void internal_paint(void)=0;
-    zone_owner_if & m_owner;
     const std::string m_name;
     const uint32_t m_width;
     const uint32_t m_height;
   };
   //----------------------------------------------------------------------------
-  void zone::paint(void)
-  {
-    m_owner.to_refresh(*this);
-    this->internal_paint();
-  }
-  //----------------------------------------------------------------------------
-  zone::zone(zone_owner_if & p_owner,
-	     const std::string & p_name,
+  zone::zone(const std::string & p_name,
              const uint32_t & p_width,
              const uint32_t & p_height):
-    m_owner(p_owner),
     m_name(p_name),
     m_width(p_width),
     m_height(p_height)
       {
       }
-  //----------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------
     const std::string & zone::get_name(void)const
       {
 	return m_name;
       }
 
-    //----------------------------------------------------------------------------
-    const zone_owner_if & zone::get_owner(void)const
-      {
-        return m_owner;
-      }
-    //----------------------------------------------------------------------------
-    zone_owner_if & zone::get_owner(void)
-      {
-        return m_owner;
-      }
     //----------------------------------------------------------------------------
     const uint32_t & zone::get_width(void)const
       {
@@ -102,13 +83,7 @@ namespace synoptic
     {
       return p_x < m_width && p_y < m_height;
     }
-    //----------------------------------------------------------------------------
-    void zone::set_pixel(const uint32_t & p_x,
-                         const uint32_t & p_y,
-                         const uint32_t & p_color)
-    {
-      m_owner.set_pixel(*this,p_x,p_y,p_color);
-    }
+
 }
 #endif // ZONE_H
 //EOF

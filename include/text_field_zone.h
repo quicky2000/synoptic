@@ -19,7 +19,7 @@
 #ifndef TEXT_FIELD_ZONE_H
 #define TEXT_FIELD_ZONE_H
 
-#include "zone.h"
+#include "display_zone.h"
 #include "quicky_exception.h"
 #include <map>
 #include <string>
@@ -27,7 +27,7 @@
 
 namespace synoptic
 {
-  class text_field_zone: public zone
+  class text_field_zone: public display_zone
   {
   public:
     inline text_field_zone(zone_owner_if &,
@@ -49,7 +49,7 @@ namespace synoptic
   text_field_zone::text_field_zone(zone_owner_if & p_owner,
 				   const std::string & p_name,
                                    const uint32_t & p_nb_char):
-    zone(p_owner,p_name,8 * p_nb_char,8),
+    display_zone(p_owner,p_name,8 * p_nb_char,8),
     m_nb_char(p_nb_char),
     m_text(p_nb_char,' ')
       {
@@ -86,19 +86,19 @@ namespace synoptic
 
     //----------------------------------------------------------------------------
     void text_field_zone::set_text(const uint64_t & p_nb)
-      {
-	std::stringstream l_stream ;
-	l_stream << p_nb;
-	set_text(l_stream.str());
-      }
+    {
+      std::stringstream l_stream ;
+      l_stream << p_nb;
+      set_text(l_stream.str());
+    }
 
     //----------------------------------------------------------------------------
     void text_field_zone::set_text(const double & p_nb)
-      {
-	std::stringstream l_stream ;
-	l_stream << p_nb;
-	set_text(l_stream.str());
-      }
+    {
+      std::stringstream l_stream ;
+      l_stream << p_nb;
+      set_text(l_stream.str());
+    }
 
     //----------------------------------------------------------------------------
     void text_field_zone::internal_paint(const uint8_t & p_char,const uint32_t & p_pos)

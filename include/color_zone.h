@@ -19,11 +19,11 @@
 #ifndef COLOR_ZONE_H
 #define COLOR_ZONE_H
 
-#include "zone.h"
+#include "display_zone.h"
 
 namespace synoptic
 {
-  class color_zone: public zone
+  class color_zone: public display_zone
   {
   public:
     inline color_zone(zone_owner_if &,
@@ -49,7 +49,7 @@ namespace synoptic
                          const uint8_t & p_r,
                          const uint8_t & p_g,
                          const uint8_t & p_b):
-    zone(p_owner,p_name,p_width,p_height),
+    display_zone(p_owner,p_name,p_width,p_height),
     m_color(p_owner.get_color_code(p_r,p_g,p_b))
       {
       }

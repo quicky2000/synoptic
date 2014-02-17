@@ -19,14 +19,14 @@
 #ifndef CUSTOM_FIELD_ZONE_H
 #define CUSTOM_FIELD_ZONE_H
 
-#include "zone.h"
+#include "display_zone.h"
 #include "quicky_exception.h"
 #include <map>
 #include <inttypes.h>
 
 namespace synoptic
 {
-  class custom_field_zone:public zone
+  class custom_field_zone:public display_zone
   {
   public:
     inline custom_field_zone(zone_owner_if &,
@@ -47,10 +47,10 @@ namespace synoptic
 				       const std::string & p_name,
 				       const uint32_t & p_width,
 				       const uint32_t & p_height):
-    zone(p_owner,p_name,p_width,p_height),
+    display_zone(p_owner,p_name,p_width,p_height),
     m_content(0)
-    {
-    }
+      {
+      }
 
     //----------------------------------------------------------------------------
     void custom_field_zone::internal_paint(void)

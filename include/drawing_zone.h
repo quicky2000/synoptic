@@ -19,7 +19,7 @@
 #ifndef DRAWING_ZONE_H
 #define DRAWING_ZONE_H
 
-#include "zone.h"
+#include "display_zone.h"
 #include "quicky_exception.h"
 #include <map>
 #include <string>
@@ -27,7 +27,7 @@
 
 namespace synoptic
 {
-  class drawing_zone: public zone
+  class drawing_zone: public display_zone
   {
   public:
     inline drawing_zone(zone_owner_if &,
@@ -47,7 +47,7 @@ namespace synoptic
 			     const std::string & p_name,
 			     const uint32_t & p_width,
 			     const uint32_t & p_height):
-    zone(p_owner,p_name,p_width,p_height)
+    display_zone(p_owner,p_name,p_width,p_height)
     {
     }
     //----------------------------------------------------------------------------
@@ -63,7 +63,7 @@ namespace synoptic
 				 const uint8_t & p_b)
     {
       uint32_t l_color = get_owner().get_color_code(p_r,p_g,p_b);
-      zone::set_pixel(p_x,p_y,l_color);
+      display_zone::set_pixel(p_x,p_y,l_color);
     }
 }
 
