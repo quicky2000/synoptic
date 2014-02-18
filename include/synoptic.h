@@ -51,7 +51,7 @@ namespace synoptic
     inline void add_zone(const uint32_t & p_x,
                          const uint32_t & p_y,
                          zone & p_zone);
-    inline void refresh(void);
+    inline void refresh(bool p_all=true);
   private:
     bool m_packed;
     zone_container m_zone_container;
@@ -119,21 +119,28 @@ namespace synoptic
     }
 
     //----------------------------------------------------------------------------
-    void synoptic::refresh(void)
+    void synoptic::refresh(bool p_all)
     {
       if(!m_packed)
         {
 	  pack();
         }
       lock();
-      for(std::set<const zone *>::const_iterator l_iter = m_zones_to_refresh.begin();
-	  m_zones_to_refresh.end() != l_iter;
-	  ++l_iter)
-	{
-	  std::map<const zone * const,zone_information>::const_iterator l_info_iter = m_zones.find(*l_iter);
-	  if(m_zones.end() == l_info_iter) throw quicky_exception::quicky_logic_exception("Try to refresh unkwown zone",__LINE__,__FILE__);
-          simple_gui::refresh(l_info_iter->second.get_x(),l_info_iter->second.get_y(),(*l_iter)->get_width(),(*l_iter)->get_height());
-	}
+      if(p_all)
+        {
+          simple_gui::refresh();
+        }
+      else
+        {
+          for(std::set<const zone *>::const_iterator l_iter = m_zones_to_refresh.begin();
+              m_zones_to_refresh.end() != l_iter;
+              ++l_iter)
+            {
+              std::map<const zone * const,zone_information>::const_iterator l_info_iter = m_zones.find(*l_iter);
+              if(m_zones.end() == l_info_iter) throw quicky_exception::quicky_logic_exception("Try to refresh unkwown zone",__LINE__,__FILE__);
+              simple_gui::refresh(l_info_iter->second.get_x(),l_info_iter->second.get_y(),(*l_iter)->get_width(),(*l_iter)->get_height());
+            }
+        }
       unlock();
       m_zones_to_refresh.clear();
     }
