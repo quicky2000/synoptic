@@ -89,8 +89,10 @@ namespace synoptic
 				  const uint32_t & p_y,
 				  zone & p_zone)
     {
-      if(p_x + p_zone.get_width() > get_width()) throw quicky_exception::quicky_runtime_exception("In container \""+get_name()+"\" : Right part of zone \""+p_zone.get_name()+"\" is outside",__LINE__,__FILE__);
-      if(p_y + p_zone.get_height() >get_height()) throw quicky_exception::quicky_runtime_exception("In container \""+get_name()+"\" : Bottom part of zone \""+p_zone.get_name()+"\"is outside",__LINE__,__FILE__);
+      if(p_x + p_zone.get_width() > get_width()) 
+        throw quicky_exception::quicky_runtime_exception("In container \""+get_name()+"\" : Right part of zone \""+p_zone.get_name()+"\" is outside",__LINE__,__FILE__);
+      if(p_y + p_zone.get_height() > get_height())
+        throw quicky_exception::quicky_runtime_exception("In container \""+get_name()+"\" : Bottom part of zone \""+p_zone.get_name()+"\"is outside",__LINE__,__FILE__);
       // Check if there is any intersection with some existing zones
       for(std::map<const zone * const,zone_information>::const_iterator l_iter = m_zone_informations.begin();
 	  l_iter != m_zone_informations.end();
