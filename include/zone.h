@@ -44,6 +44,7 @@ namespace synoptic
 			 const uint32_t & p_y)const;
     virtual void collect_display_zones(std::map<const zone * const,zone_information> & p_zones)const=0;
     virtual void paint(void)=0;
+    virtual ~zone(void){}
   private:
     const std::string m_name;
     const uint32_t m_width;
