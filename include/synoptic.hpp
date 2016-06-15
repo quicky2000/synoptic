@@ -22,7 +22,7 @@ synoptic::synoptic(const uint32_t & p_width,
   m_packed(false),
   m_zone_container("synoptic_pane",p_width,p_height)
 {
-  createWindow(p_width,p_height);
+  create_window(p_width,p_height);
 }
 //----------------------------------------------------------------------------
 void synoptic::add_zone(const uint32_t & p_x,
@@ -65,7 +65,7 @@ uint32_t synoptic::get_color_code(const uint8_t & r,
 				  const uint8_t & g,
 				  const uint8_t & b)
 {
-  return getColorCode(r,g,b);
+  return simple_gui::get_color_code(r,g,b);
 }
 
 //----------------------------------------------------------------------------

@@ -30,7 +30,7 @@
 
 namespace synoptic
 {
-  class synoptic: protected simple_gui, public zone_owner_if
+  class synoptic: protected simple_gui::simple_gui, public zone_owner_if
   {
   public:
     inline synoptic(const uint32_t & p_width,
