@@ -42,11 +42,11 @@ namespace synoptic
     // Methods from zone_owner_if
     inline uint32_t get_color_code(const uint8_t & r,
 				   const uint8_t & g,
-				   const uint8_t & b);
+				   const uint8_t & b) override;
+    inline void to_refresh(const zone & p_zone) override;
+    // End of methods from zone_owner_if
     inline void paint(void);
     inline void pack(void);
-    inline void to_refresh(const zone & p_zone);
-    // End of methods from zone_owner_if
 
     inline void add_zone(const uint32_t & p_x,
                          const uint32_t & p_y,
