@@ -36,9 +36,10 @@ namespace synoptic
     inline void set_color(const uint8_t & p_r,
                           const uint8_t & p_g,
                           const uint8_t & p_b);
+    inline void set_color_code(const uint32_t & p_color_code);
   private:
     inline void internal_paint(void);
-    uint32_t m_color;
+    uint32_t m_color_code;
   };
 
   //----------------------------------------------------------------------------
@@ -50,7 +51,7 @@ namespace synoptic
                          const uint8_t & p_g,
                          const uint8_t & p_b):
     display_zone(p_owner,p_name,p_width,p_height),
-    m_color(p_owner.get_color_code(p_r,p_g,p_b))
+    m_color_code(p_owner.get_color_code(p_r,p_g,p_b))
       {
       }
     //----------------------------------------------------------------------------
@@ -60,7 +61,7 @@ namespace synoptic
         {
           for(uint32_t l_y = 0 ; l_y < get_height() ; ++l_y)
             {
-              set_pixel(l_x,l_y,m_color);
+              set_pixel(l_x,l_y,m_color_code);
             }
         }
     }
@@ -70,7 +71,13 @@ namespace synoptic
                                const uint8_t & p_g,
                                const uint8_t & p_b)
     {
-      m_color = get_owner().get_color_code(p_r,p_g,p_b);
+      m_color_code = get_owner().get_color_code(p_r,p_g,p_b);
+    }
+
+    //----------------------------------------------------------------------------
+    void color_zone::set_color_code(const uint32_t & p_color_code)
+    {
+      m_color_code = p_color_code;
     }
 }
 #endif // COLOR_ZONE_H
